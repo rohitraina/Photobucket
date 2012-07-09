@@ -1,0 +1,13 @@
+<div id="sub-header" class="interior">
+	<div id="sub-header-inner">
+	    <h2>Tags</h2>
+	</div>
+</div>
+
+<div id="content" class="clearfix">
+	<div id="content-inner">
+		<% for tag in @tags %>
+		<%= link_to tag.title, tag_photos_path(tag.title) %>&nbsp;
+		<% end %>
+	</div>
+</div>

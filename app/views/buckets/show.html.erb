@@ -1,0 +1,27 @@
+<div id="sub-header" class="interior">
+	<div id="sub-header-inner">
+		<h2><%= h @bucket.title %></h2>
+	</div>
+</div>
+
+<div id="content" class="clearfix">
+	<div id="content-inner">
+		<p><%= h @bucket.description %></p>
+	
+		<% for album in @albums %>
+		<div class="row">
+		  <div class="title">
+			<%= render :partial => "photos/thumb", :locals => {:photo => album.photos.first } unless album.photos.empty? %>
+			<p><%= link_to album.title, bucket_album_path(@bucket, album) %></p>
+		  </div>
+		  <div class="image">
+			<%= render :partial => "photos/thumb", :collection => album.photos.find(:all, :limit => 5, :offset => 1), :as => :photo %>
+		  </div>
+		</div>
+		<% end %>
+	</div>
+</div>	
+<%= content_for :action_links do %>
+	<%= link_to "Edit photo bucket", edit_bucket_path(@bucket) %> | 
+	<%= link_to "New album", new_bucket_album_path(@bucket) %>
+<% end %>

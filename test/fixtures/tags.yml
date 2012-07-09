@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+tag_one:
+  title: yash,
+
+tag_two:
+  title: nishu
+  
+tag_three:
+  title: mummy
+  
+tag_four:
+  title: daddy

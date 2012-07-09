@@ -1,0 +1,25 @@
+== Welcome to Photobucket
+
+== Requirements
+
+Rails 3.2.3
+
+Software
+Default:
+- ExifTool: http://www.sno.phy.queensu.ca/~phil/exiftool/
+- ImageMagicK: http://www.imagemagick.org
+Optional:
+- ImageScience: http://sourceforge.net/projects/freeimage/
+
+Ruby Gems: See Gemfile
+
+== Installation
+
+1. Clone the project from GitHub:
+	GitHub: git clone git://github.com/rohitraina/Photobucket.git
+2. Install required software listed above
+3. 'bundle install' to install required gems.
+4. Create database user and edit database file config/database.yml
+5. rake db:create
+6. rake db:migrate
+7. Start up the project with your preferred web-server

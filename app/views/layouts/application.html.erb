@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title><%= ENV['TITLE'] || "Photos" %></title>
+	<meta name="viewport" content="width=device-width">
+	<meta name="viewport" content="initial-scale=1.0">
+	<%= yield :head %>
+	<%= stylesheet_link_tag 'application', 'layout' %>
+	<%= csrf_meta_tag %>
+	<script type="application/javascript">		
+		setTimeout(function() {
+		    $('#flash-notice').slideUp("slow");
+		}, 6000);
+		
+		setTimeout(function() {
+		    $('#flash-notice').slideDown("slow");
+		}, 1000);
+	</script>
+</head>
+<body>
+<div id="header">
+	<h1>
+		<%= link_to("Photo Bucket", root_path) %>
+	</h1>
+    <br />
+    <br />
+    <br />
+    <br />
+	<%= breadcrumbs %>
+</div>
+
+
+	<%if flash[:notice] %>
+	    <div id="flash-notice">
+	        <%= flash[:notice] %>
+	    </div>
+    <% end %>	
+	<div id="action_links">
+		<%= yield :action_links %>
+	</div>
+	<%= yield %>
+
+
+<div id="footer"></div>
+
+<%= javascript_include_tag 'jquery-1.4.2.js', 'rails', 'photo_bucket' %>
+<%= yield :javascript %>
+</body>
+</html>

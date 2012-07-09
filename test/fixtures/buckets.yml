@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+bucket_yash:
+  title: Yash
+  description: This photo bucket contains pics related to Yash.
+
+bucket_nishu:
+  title: Nishu
+  description: This photo bucket contains pics related to Nishu.
+  
+invalid_bucket:  
+  title: None
+  description: This photo bucket contains pics related to None.

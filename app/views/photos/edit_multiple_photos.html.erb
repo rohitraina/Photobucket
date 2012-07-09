@@ -1,0 +1,25 @@
+<div id="sub-header" class="interior">
+	<div id="sub-header-inner">
+	    <h2>Edit All Photos</h2>
+	</div>
+</div>
+
+<div id="content" class="clearfix">
+	<div id="content-inner">
+		<%= form_for :photos, :url => update_multiple_photos_photos_path, :html => { :method => :put } do |f| %>
+		<% for photo in @photos %>
+		<p>
+		<%= f.fields_for photo, :index => photo.id do |p|%>
+			<%= p.check_box :_delete  %>
+			<%= render :partial => "photos/thumb", :locals => {:photo => photo } %>
+			<%= p.text_field :title %>
+			<%= p.text_field :tags, :value => photo.tag_list %>
+		<% end%>
+		</p>
+		<% end%>
+		  <p><%= f.submit "Submit" %></p>
+		<% end %>
+		
+		<br /><%= link_to "Back to #{@album.title}", @album %>
+	</div>
+</div>

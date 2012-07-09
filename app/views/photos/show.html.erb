@@ -1,0 +1,40 @@
+<div id="sub-header" class="interior">
+	<div id="sub-header-inner">
+	    <h2><%= @photo.title%></h2>
+	</div>
+</div>
+
+<div id="content" class="clearfix">
+	<div id="content-inner">
+		<div id="fullimage">
+			<div id="navigation">
+				<p class="links">
+					<% unless @previous.nil? %>
+					<%= link_to "Previous", [ @photo.album.buckets.first, @photo.album, @previous] %>
+					<% unless @next.nil? %>
+					 | 
+					<% end %>
+					<% end %>
+					<% unless @next.nil? %>
+					<%= link_to "Next", [ @photo.album.buckets.first, @photo.album, @next] %> 
+					<% end %>
+				</p>
+			</div>
+		  <p><%= link_to_if @next, image_tag(@photo.file.single.url ), [ @photo.album.buckets.first, @photo.album, @next] %></p>
+		</div>
+		
+		<p><%= @photo.description %></p>
+		<p>Tagged with: 
+		<% for tag in @photo.tags.map{|tag|tag.title}.sort %>
+		<%= link_to tag, tag_photos_path(tag) %>
+		<% end %>
+	</div>
+</div>
+
+<%= content_for :action_links do %>
+	<% if params[:bucket_id] %>
+		<%= link_to "Edit photo", edit_bucket_album_photo_path(params[:bucket_id], params[:album_id], @photo) %>
+	<% else %>
+		<%= link_to "Edit photo", edit_photo_path(@photo) %>
+	<% end %>
+<% end %>

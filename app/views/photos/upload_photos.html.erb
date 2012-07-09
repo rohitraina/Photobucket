@@ -1,0 +1,94 @@
+<%= content_for :javascript do %>
+<style type="text/css">@import url(/javascripts/plupload/js/jquery.plupload.queue/css/jquery.plupload.queue.css);</style>
+<%= javascript_include_tag "plupload/js/plupload.full.js" -%>
+<%= javascript_include_tag "plupload/js/jquery.plupload.queue/jquery.plupload.queue.js"  -%>
+
+<script type="text/javascript">
+$(document).ready(function() {
+	
+	$("#uploader").pluploadQueue({
+			// General settings
+			runtimes : 'flash,html5,browserplus,silverlight,gears',
+			url : '<%= photos_path %>',
+			max_file_size : '10mb',
+			multipart: true,  
+			   multipart_params: {  
+				'<%= get_session_key %>' : encodeURIComponent('<%= cookies[get_session_key] %>'),
+				'authenticity_token' : '<%= form_authenticity_token %>',
+				'photo[album_id]' : "<%= @album.id %>"
+			   },
+
+			// Resize images on clientside if we can
+			//resize : {width : 320, height : 240, quality : 90},
+
+			// Specify what files to browse for
+			filters : [
+				{title : "Image files", extensions : "JPG,jpg,gif,png,bmp,jpeg,tif,tiff"}
+			],
+
+			// Flash settings
+			flash_swf_url : '/javascripts/plupload/js/plupload.flash.swf',
+
+			// Silverlight settings
+			silverlight_xap_url : '/javascripts/plupload/js/plupload.silverlight.xap',
+			
+			// Post init events, bound after the internal events
+				init : {
+
+					FileUploaded: function(up, file, info) {
+						// Called when a file has finished uploading
+						res = info.response;
+						if (res.substring(0, 7) === "FILEID:") {
+							var image = $('<img>').appendTo('#thumbs')
+							image.css('display','none')
+							image.attr('src', res.substring(7) )
+							image.fadeIn('slow')
+						}
+					}
+				}
+		});
+
+		// Client side form validation
+		$('form').submit(function(e) {
+			var uploader = $('#uploader').pluploadQueue();
+
+			// Validate number of uploaded files
+			if (uploader.total.uploaded == 0) {
+				// Files in queue upload them first
+				if (uploader.files.length > 0) {
+					// When all files are uploaded submit form
+					uploader.bind('UploadProgress', function() {
+						if (uploader.total.uploaded == uploader.files.length)
+							$('form').submit();
+					});
+
+					uploader.start();
+				} else
+					alert('You must at least upload one file.');
+
+				e.preventDefault();
+			}
+		});
+})
+</script>
+<% end %>
+<div id="sub-header" class="interior">
+	<div id="sub-header-inner">
+	    <h2>Add Photos</h2>
+	</div>
+</div>
+
+<div id="content" class="clearfix">
+	<div id="content-inner">
+		<form>
+		<div id="uploader">
+		        <p>You browser doesn't have Flash, Silverlight, Gears, BrowserPlus or HTML5 support.</p>
+		    </div>
+		
+		<br>
+		<div id="thumbs"></div>
+		</form>
+		
+		<br><%= link_to "Back to #{@album.title}", @album %>
+	</div>
+</div>

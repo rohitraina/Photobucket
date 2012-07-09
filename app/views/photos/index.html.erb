@@ -1,0 +1,16 @@
+<div id="sub-header" class="interior">
+	<div id="sub-header-inner">
+	    <h2>Photos</h2>
+	</div>
+</div>
+
+<div id="content" class="clearfix">
+	<div id="content-inner">
+		<ul><%= render :partial => 'photos/thumb',:collection => @photos, :as => :photo %></ul>
+	</div>
+</div>
+
+<%= content_for :action_links do %>
+	<%= link_to "Show albums containing photos tagged with #{params[:q]}", albums_path(:q => params[:q]) if params[:q] %>
+	<%= link_to "Show all photos tagged with #{params[:tag_id]}", tag_photos_path(params[:tag_id]) if params[:tag_id] && params[:album_id] %>
+<% end %>

@@ -1,0 +1,44 @@
+<div id="sub-header" class="interior">
+	<div id="sub-header-inner">
+		<h2><%= @album.title %></h2>
+	</div>
+</div>
+
+<div id="content" class="clearfix">
+	<div id="content-inner"> 
+		<div id="multipleimages">
+		<table>
+			<% count = 0.0 %>
+			<% for photo in @album.photos.find(:all, :order => "Id ASC") %>
+				<% count += 1%>
+		  		<% if count == 1 || ( (count-1) / 4.0 == ( (count-1) / 4.0).to_i ) %><tr><% end %>
+				<td><%= link_to image_tag( photo.file.preview.url ), [@album.buckets.first, @album, photo] %></td>
+		  		<% if count / 4.0 == (count / 4.0).to_i %></tr><% end %>
+			<% end %>
+		</table>
+		</div>
+		
+		<p><%= @album.description %></p>
+		
+		<% unless @album.photo_tags.empty? %>
+			<p>Tagged with: 
+			<% for tag in @album.photo_tags.map{|tag|tag.title}.sort %>
+			<%= link_to tag, album_tag_photos_path(@album, tag) %>
+		<% end %>
+		</p>
+		<% end %>
+	</div>
+</div>  
+
+<%= content_for :action_links do %>
+	<% if params[:bucket_id] %>
+		<%= link_to "Edit album", edit_bucket_album_path(params[:bucket_id],@album) %> |&nbsp;
+		<%= link_to "Edit all photos", edit_multiple_photos_bucket_album_photos_path(params[:bucket_id],@album) %> |&nbsp;
+		<%= link_to "Add photos", upload_photos_bucket_album_photos_path(params[:bucket_id], @album) %>
+	<% else %>
+		<%= link_to "Edit album", edit_album_path(@album) %> |&nbsp;
+		<%= link_to "Edit all photos", edit_multiple_photos_album_photos_path(@album) %> |&nbsp;
+		<%= link_to "Add photos", upload_photos_album_photos_path(@album) %>
+	<% end %>
+
+<% end %>

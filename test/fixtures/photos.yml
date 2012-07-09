@@ -1,0 +1,43 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+photo_one:
+  title: 100 3333
+  description: 
+  album_id: albums(:album_one).id
+  file: 100_3333.JPG
+  
+photo_two:
+  title: 100 3334
+  description: 
+  album_id: albums(:album_one).id
+  file: 100_3334.JPG
+
+photo_three:
+  title: 03072012071
+  description: 
+  album_id: albums(:album_one).id
+  file: 03072012071.jpg
+  
+photo_four:
+  title: 03072012072
+  description: 
+  album_id: albums(:album_two).id
+  file: 03072012072.jpg
+
+photo_five:
+  title: Dsc03516
+  description: 
+  album_id: albums(:album_three).id
+  file: Dsc03516.JPG
+
+photo_six:
+  title: Dsc03516
+  description: 
+  album_id: albums(:album_three).id
+  file: Dsc03516.JPG
+  
+invalid_photo:
+  title: None
+  description: 
+  album_id: albums(:album_three).id
+  file: none

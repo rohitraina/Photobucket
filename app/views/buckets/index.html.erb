@@ -1,0 +1,20 @@
+<div id="sub-header" class="interior">
+	<div id="sub-header-inner">
+	    <h2>Photo Buckets</h2>
+	</div>
+</div>
+
+<div id="content" class="clearfix">
+	<div id="content-inner">
+		<% for bucket in @buckets %>
+			<div class="thumb">
+				<h3><%= link_to bucket.title, bucket %></h3>
+				<%= link_to (image_tag bucket.albums.find(:first).photos.first.file.bucket.url ), bucket_path(bucket) unless bucket.albums.empty? || bucket.albums.find(:first).photos.empty? %>
+			</div>
+		<% end %>
+	</div>
+</div>
+
+<%= content_for :action_links do %>
+	<%= link_to "New Photo Bucket", new_bucket_path %>
+<% end %>

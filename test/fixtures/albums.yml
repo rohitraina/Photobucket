@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+album_one:
+  title: First Birthday Pics
+  description: This album contains Yash's first birthday pics.
+  path: first-birthday-pics
+
+album_two:
+  title: 01-05-12
+  description: This album contains pics related to Yash til 01-05-12
+  path: 01-05-12
+
+album_three:
+  title: Marriage
+  description: This album contains Nishu's Marriage pics
+  path: marriage
+  
+invalid_album:
+  title: None
+  description: This album contains nothing
+  path: none

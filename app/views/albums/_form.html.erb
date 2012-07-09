@@ -1,0 +1,19 @@
+<%= content_for :javascript do %>
+	<%= javascript_include_tag "tag/tag"  -%>
+<% end %>
+
+<%= hidden_field_tag :all_tags, "'#{Tag.find(:all).map { |tag| tag.title }.join('\',\'')}'" %>
+<%= hidden_field_tag :bucket_id, params[:bucket_id] %>
+<%= form.hidden_field :id %>
+
+<%= form.label :title, :Title, {:class => 'big'} %><br />
+<%= form.text_field :title, {:class => 'big'} %><br />
+
+<%= form.label :description %><br />
+<%= form.text_area :description %><br />
+
+<%= form.label :tags %><br />
+<%= form.text_field :tags, { :autocomplete => "off", :class => 'tag_list', :value => (@album.tags.map{|tag|tag.title}.join(" ") unless @album.tags.nil?) } %><br />
+
+<br />
+Contains: <%= @album.photos.count %> photos<br/>
