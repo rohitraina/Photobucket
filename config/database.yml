@@ -12,7 +12,7 @@ development:
   database: Photobucket_development
   pool: 5
   username: root
-  password: abrs
+  password: password
   socket: /var/run/mysqld/mysqld.sock
 # password: \/\/@B4du/\/!ya
 # socket: /var/lib/mysql/mysql.sock
@@ -27,7 +27,7 @@ test:
   database: Photobucket_test
   pool: 5
   username: root
-  password: abrs
+  password: password
   socket: /var/run/mysqld/mysqld.sock
 # password: \/\/@B4du/\/!ya
 # socket: /var/lib/mysql/mysql.sock
@@ -39,7 +39,7 @@ production:
   database: Photobucket_production
   pool: 5
   username: root
-  password: abrs
+  password: password
   socket: /var/run/mysqld/mysqld.sock
 # password: \/\/@B4du/\/!ya
 # socket: /var/lib/mysql/mysql.sock
